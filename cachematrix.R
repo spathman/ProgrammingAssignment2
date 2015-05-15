@@ -15,6 +15,9 @@
 
 ##  a$set(matrix(1:6, nrow = 2, ncol = 3)) # sets 'a' to the new value
 
+## a$getinverse() # returns the casched value if exits otherwise returns NULL
+
+##
 makeCacheMatrix <- function(x = matrix()) {
     inv <- NULL # holds the inverse of this matrix
     set <- function(y) {
@@ -31,7 +34,10 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## Function cacheSolve takes the special matrix 'x' and returns it's inverse
+## if x's inverse is cached it will retun the chched value, otherwise if the
+## matrix has an inverse it will calculate the inverse, cacshe the value
+## and return the value
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
@@ -42,7 +48,7 @@ cacheSolve <- function(x, ...) {
     }
     # if no cached value
     data <- x$get() # get the matrix associated with 'x'
-    if (nrow(data) != ncol(data)) {
+    if (nrow(data) != ncol(data)) { # not a squre matrix
         message("It is not a square matrix!")
         return(NULL)
     }else if (det(data) == 0) {
